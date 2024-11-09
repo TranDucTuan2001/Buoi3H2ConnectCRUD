@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Sách Công Ty</title>
+</head>
+<body>
+<h2>Danh Sách Công Ty</h2>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Tên Công Ty</th>
+  </tr>
+  <tr th:each="company : ${companies}">
+    <td th:text="${company.id}">1</td>
+    <td th:text="${company.nameCompany}">Company A</td>
+  </tr>
+</table>
+</body>
+</html>
