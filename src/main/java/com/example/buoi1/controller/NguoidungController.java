@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class NguoidungController {
     public NguoidungController(UserService userService, CompanyService companyService) {
         this.userService = userService;
         this.companyService = companyService;
+    }
+    @GetMapping("/")
+    public String homePage() {
+        return "homePage";
     }
 
     @GetMapping("/user")
@@ -47,5 +52,24 @@ public class NguoidungController {
         List<UserDemo> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "listUser";
+    }
+    @GetMapping("/editUser/{id}")
+    public String editUser(@PathVariable("id") int id, Model model) {
+        UserDemo user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("companies", companyService.getAllCompanies());
+        return "editUser";
+    }
+
+    @PostMapping("/editUser")
+    public String updateUser(@ModelAttribute("user") UserDemo user) {
+        userService.saveOrUpdate(user);
+        return "redirect:/listUser";
+    }
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") int id) {
+        userService.deleteUserById(id);
+        return "redirect:/listUser";
     }
 }

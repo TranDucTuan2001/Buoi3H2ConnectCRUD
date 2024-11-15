@@ -6,21 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
+
     @Autowired
     private CompanyRepository companyRepository;
+
+    public void saveOrUpdate(Company company) {
+        companyRepository.save(company);
+    }
 
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
 
-    public Company saveOrUpdate(Company company) {
-        return companyRepository.save(company);
+    public Company getCompanyById(int id) {
+        Optional<Company> company = companyRepository.findById(id);
+        return company.orElse(null);  // Trả về null nếu không tìm thấy company
     }
 
-    public Company getCompanyById(int id) {
-        return companyRepository.findById(id).orElse(null);
+    public void deleteCompanyById(int id) {
+        companyRepository.deleteById(id);
     }
 }

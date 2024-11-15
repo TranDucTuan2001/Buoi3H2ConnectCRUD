@@ -4,9 +4,7 @@ import com.example.buoi1.model.Company;
 import com.example.buoi1.service.CompanyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CompanyController {
@@ -33,5 +31,24 @@ public class CompanyController {
     public String listCompanies(Model model) {
         model.addAttribute("companies", companyService.getAllCompanies());
         return "listCompany";
+    }
+
+    @GetMapping("/editCompany/{id}")
+    public String editCompany(@PathVariable("id") int id, Model model) {
+        Company company = companyService.getCompanyById(id);
+        model.addAttribute("company", company);
+        return "editCompany";
+    }
+
+    @PostMapping("/editCompany")
+    public String updateCompany(@ModelAttribute("company") Company company) {
+        companyService.saveOrUpdate(company);
+        return "redirect:/listCompany";
+    }
+
+    @GetMapping("/deleteCompany/{id}")
+    public String deleteCompany(@PathVariable("id") int id) {
+        companyService.deleteCompanyById(id);
+        return "redirect:/listCompany";
     }
 }

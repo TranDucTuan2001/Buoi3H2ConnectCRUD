@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chỉnh Sửa Công Ty</title>
 </head>
 <body>
-<form action="/company/edit" method="post">
-    <input type="hidden" name="id" value="${company.id}">
-    <label for="companyName">Company Name:</label>
-    <input type="text" id="companyName" name="companyName" value="${company.companyName}" required>
-    <button type="submit">Update Company</button>
+<h2>Chỉnh Sửa Công Ty</h2>
+<form th:action="@{/editCompany}" th:object="${company}" method="POST">
+    <input type="hidden" th:field="*{id}"/>
+    Tên Công Ty:
+    <input type="text" th:field="*{nameCompany}" required/>
+    <br/>
+    <input type="submit" value="Lưu"/>
 </form>
-
 </body>
 </html>
