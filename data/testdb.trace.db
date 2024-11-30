@@ -1,0 +1,6 @@
+2024-11-29 23:02:24.753517+07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM USER_ROLES USER_ROLES [*]USER_DEMO ROLE"; SQL statement:
+SELECT * FROM USER_ROLES USER_ROLES USER_DEMO ROLE [42000-224]
+2024-11-29 23:11:44.431646+07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM USER_DEMO ROLE [*]USER_ROLES"; SQL statement:
+SELECT * FROM USER_DEMO ROLE USER_ROLES [42000-224]
