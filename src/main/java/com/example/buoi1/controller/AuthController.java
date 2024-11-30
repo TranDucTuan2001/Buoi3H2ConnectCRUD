@@ -1,5 +1,6 @@
 package com.example.buoi1.controller;
 
+import com.example.buoi1.model.Company;
 import com.example.buoi1.model.Role;
 import com.example.buoi1.model.UserDemo;
 import com.example.buoi1.repository.RoleRepository;
@@ -57,7 +58,7 @@ public class AuthController {
 //        return "User registered successfully!";
 //    }
 @PostMapping("/register")
-public String registerUser(@ModelAttribute UserDemo userDemo) {
+public String registerUser(@ModelAttribute UserDemo userDemo, @RequestParam("companyId") Integer companyId) {
     if (userRepository.findByEmail(userDemo.getEmail()) != null) {
         return "redirect:/auth/register?error=UserExists";
     }
@@ -73,6 +74,8 @@ public String registerUser(@ModelAttribute UserDemo userDemo) {
         roleRepository.save(userRole);
     }
     userDemo.setRoles(Collections.singleton(userRole));
+    Company company = companyService.getCompanyById(companyId);
+    userDemo.setCompany(company);
 
     userRepository.save(userDemo);
     return "redirect:/login?success";

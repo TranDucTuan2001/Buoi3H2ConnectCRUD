@@ -23,10 +23,12 @@
     <label>
       Company:
       <select name="companyId" required>
+        <option value="" disabled selected>Select a Company</option>
         <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.nameCompany}">
-          Select a Company
+          Company Name
         </option>
       </select>
+
     </label>
   </div>
 
